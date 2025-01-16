@@ -1,0 +1,25 @@
+{
+    "name": "markl/php-secure-guard",
+    "description": "A lightweight PHP library for securing web applications with features like input sanitization, security headers, and CSRF protection.",
+    "type": "library",
+    "require": {
+        "psr/log": "3.x-dev",
+        "phpunit/phpunit": "12.0.x-dev",
+        "symfony/polyfill-php80": "1.x-dev",
+        "defuse/php-encryption": "dev-master",
+        "symfony/cache": "7.3.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Markl\\PhpSecureGuard\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mark",
+            "email": "marklua599@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
