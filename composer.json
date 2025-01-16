@@ -7,7 +7,8 @@
         "phpunit/phpunit": "12.0.x-dev",
         "symfony/polyfill-php80": "1.x-dev",
         "defuse/php-encryption": "dev-master",
-        "symfony/cache": "7.3.x-dev"
+        "symfony/cache": "7.3.x-dev",
+        "monolog/monolog": "^3.0@dev"
     },
     "license": "MIT",
     "autoload": {

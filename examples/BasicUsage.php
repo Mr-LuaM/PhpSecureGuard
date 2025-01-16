@@ -6,6 +6,10 @@ use Markl\PhpSecureGuard\InputSanitizer;
 use Markl\PhpSecureGuard\CsrfProtection;
 use Markl\PhpSecureGuard\Encryption;
 
+use Markl\PhpSecureGuard\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger as MonologLogger;
+
 $sanitizer = new InputSanitizer();
 $csrf = new CsrfProtection();
 $key = "supersecretkey";
@@ -43,3 +47,15 @@ echo "Encrypted: " . $encryptedData . PHP_EOL;
 // Example: Decrypt data
 $decryptedData = $encryption->decrypt($encryptedData);
 echo "Decrypted: " . $decryptedData . PHP_EOL;
+// Example: Using Monolog as the PSR-3 Logger
+$monolog = new MonologLogger('php-secure-guard');
+$monolog->pushHandler(new StreamHandler('php://stdout'));
+
+$logger = new Logger($monolog);
+$logger->info('This is an informational message.');
+$logger->warning('This is a warning message.');
+$logger->error('This is an error message.');
+
+// Example: Using Default Logger (NullLogger)
+$defaultLogger = new Logger();
+$defaultLogger->info('This will not output anything.');
