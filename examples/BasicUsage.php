@@ -9,6 +9,7 @@ use Markl\PhpSecureGuard\Encryption;
 use Markl\PhpSecureGuard\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger as MonologLogger;
+use Markl\PhpSecureGuard\RateLimiter;
 
 $sanitizer = new InputSanitizer();
 $csrf = new CsrfProtection();
@@ -59,3 +60,19 @@ $logger->error('This is an error message.');
 // Example: Using Default Logger (NullLogger)
 $defaultLogger = new Logger();
 $defaultLogger->info('This will not output anything.');
+// Setup Monolog logger
+$logger = new MonologLogger('rate_limiter');
+$logger->pushHandler(new StreamHandler('php://stdout'));
+
+// Create a RateLimiter instance
+$rateLimiter = new RateLimiter(5, 60, $logger);
+
+// Simulate requests
+$identifier = 'user123';
+for ($i = 0; $i < 7; $i++) {
+    if ($rateLimiter->isAllowed($identifier)) {
+        echo "Request {$i} allowed\n";
+    } else {
+        echo "Request {$i} blocked\n";
+    }
+}
